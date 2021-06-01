@@ -24,8 +24,6 @@ AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
 
 ## Installation
 
-This tutorial is made on top of one local machine an Linux Ubuntu 18.04 LTS machine. 
-
 ### Docker
 Install Docker using the Docker CE installation [guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/#extra-steps-for-aufs).
 
@@ -53,8 +51,6 @@ Start [Nuclio](https://github.com/nuclio/nuclio) using a docker container.
 $ docker run -p 8070:8070 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp nuclio/dashboard:stable-amd64
 ```
 
-Browse to http://localhost:8070, create a project, and add a function. When run outside of an orchestration platform (for example, Kubernetes or Swarm), the dashboard will simply deploy to the local Docker daemon.
-
 ----------------------------------------------------------------------------------------------------------------------------
 
 ### RabbitMQ 
@@ -64,9 +60,6 @@ Start [RabbitMQ](https://www.rabbitmq.com) instance with MQTT enabled using dock
 ```sh
 $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt 
 ```
-
-Browse to http://localhost:9000, and login using username: guest and password: guest, to access to the RabbitMQ managment, where is possible to visualize the message queues and the broker status.
-
 
 ------------------------------------------------------------------------------------------------------------------------------
 
