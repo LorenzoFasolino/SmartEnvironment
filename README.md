@@ -1,8 +1,10 @@
 # SmartEnvironment
 
-AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
+SmartEnvironment is a project whose goal is realize an iot application whitout using server. So the main goal is to have a serverless architecture. The main functionality of this project is to set brightness and color of a LED light according to the conditions of the surrounding environment. So the idea is to have the brightness of the LED light that is inversely proportional to the ambient brightness in order to always have a constant brightness, in a room, during the different hours of the day. Moreover the color of the light can change in according to ambient temperature, if temperature il cold, the color of LED light is warm and vice versa. 
 
-#### Tutorial Structure
+For the realization of the idea we have used an MQTT broker, and different sensors can sand their values on differents queues. In this architecture there are three sensors, light sensor, temperature sensor and humidity sensor. Each of this publish a message on an MQTT topic. Than thare are three nuclio functions, one for each sensor, each of this is subscribed to the related topic. When a function that is subscribed to a topic recive a message, it send a value of brightness or of color the LED light must set. All sensors messages are captured by a logger which stores messages and all values can by monitored on a smartphone. Moreover if the temperature or humidity are too high an email is sent to alert.
+
+#### Structure
 
 * **[Architecture](#architecture)**
 * **[Prerequisites](#prerequisites)**
@@ -12,6 +14,18 @@ AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
 ## Architecture
 <p align="center"><img src="architecture/Architecture.png" width="1000"/></p>
 
+* <b>Sensors</b>: there are light, temperature and humidity sensors that send their values on differents MQTT topics.
+* <b>Devices</b>:
+  * <b>LED light</b> thet is subscibed to topics, where recive messages for change brightness and color
+  * <b>logger</b> recive informations about sensors values
+  * <b>monitor</b> a smartphone that can recive information ablut sensors values
+* <b>Nuclio functions</b>:
+  * <b>light</b> is triggred by message on topic "iot/sensors/light", when message arrive, it publish a message on topic "iot/devices/brightness" to signal the right brightness to be set
+  * <b>temperature</b> is triggred by message on topic "iot/sensors/temperature", when message arrive, it publish a message on topic "iot/devices/color" to signal the right color to be set. If temperature if too high an IFTT applet if trggered by REST API for send an alert e-mail
+  * <b>monitor</b> If humidity if too high an IFTT applet if trggered by REST API for send an alert e-mail
+
+<br><br>
+
 ## Prerequisites
 - OS: 
     - Ubuntu 18.04 LTS
@@ -20,6 +34,16 @@ AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
     - Nuclio (Serverless computing provider)
     - RabbitMQ (AMQP and MQTT message broker)
     - Node.js
+    - IFTTT account
+- Hardware (<b>optional</b>):
+    - 2 x ESP8266
+    - 1 DHT11 sensor
+    - 1 Analog light sensor
+    - 1 RGB LED stripe
+
+You don't have to have hardware requirements, if you don't have these, you can run the project with simulators for [devices](/devices/simulators/) and [sensors](/sensors/simulators/).
+
+<br><br>
 
 ## Installation
 
@@ -43,6 +67,19 @@ $ sudo apt-get install docker-ce
 ```
 
 ------------------------------------------------------------------------------------------------------------------------------
+
+### Docker Compose
+
+Install Docker Compose using the Docker Compose installation [guide](https://docs.docker.com/compose/install/#install-compose).
+
+```sh
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
 ### Nuclio 
 Start [Nuclio](https://github.com/nuclio/nuclio) using a docker container.
 
@@ -59,6 +96,11 @@ Start [RabbitMQ](https://www.rabbitmq.com) instance with MQTT enabled using dock
 ```sh
 $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt 
 ```
+
+------------------------------------------------------------------------------------------------------------------------------
+### IFTTT 
+
+Create two applet that is triggred by an HTTP request with Webhooks
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -124,7 +166,7 @@ node light.js
 
 ### ESP8266
 
-For run code un ESP8266, you can compile and load .ino files with [Arduino IDE](https://www.arduino.cc/en/software).
+For run code on ESP8266, you can compile and load .ino files with [Arduino IDE](https://www.arduino.cc/en/software).
 
 ------------------------------------------------------------------------------------------------------------------------------
 
