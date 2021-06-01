@@ -64,9 +64,9 @@ $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### Setup functions
-1.Open nuclio Dashboard http://localhost:8070
-2.Create a new nuclio project
-3.Inside the project 
+1. Open nuclio Dashboard http://localhost:8070
+2. Create a new nuclio project
+3. Inside the project 
 
 
 ------------------------------------------------------------------------------------------------------------------------------
