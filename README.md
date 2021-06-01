@@ -7,7 +7,6 @@ AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
 * **[Architecture](#architecture)**
 * **[Prerequisites](#prerequisites)**
 * **[Installation](#installation)**
-* **[Examples](#examples)**
 
 
 ## Architecture
@@ -25,7 +24,7 @@ AbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstractAbstract
 ## Installation
 
 ### Docker
-Install Docker using the Docker CE installation [guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/#extra-steps-for-aufs).
+Install [Docker](https://www.docker.com) using the Docker CE installation [guide](https://docs.docker.com/install/linux/docker-ce/ubuntu/#extra-steps-for-aufs).
 
 ```sh
 $ sudo apt-get update
@@ -63,18 +62,76 @@ $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt
 
 ------------------------------------------------------------------------------------------------------------------------------
 
-### Setup functions
-1. Open nuclio Dashboard http://localhost:8070
-2. Create a new nuclio project
-3. Inside the project click on <b>NEW FUNCTION</b>
-4. Import each .yaml file that is in functions directory, one by one
+### Parameters
+In each files replace this strings with you valid parameter<br>
+* <b>MQTT-BROKER-IP</b> the ip of the MQTT broker
+* <b>MQTT-USERNAME</b> the username for MQTT
+* <b>MQTT-PASSWORD</b> the password for MQTT
+* <b>IFTTT-KEY</b> the ifttt key that you can find [here]()
 
+
+For .ino files (files for ESP8266 board)
+* <b>WIFI-SSID</b> your WI-Fi ssid
+* <b>WIFI-PASSWORD</b> your WI-Fi password 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+### Nuclio function
+1. Set up in all .yaml files,in this [directory](/functions/), the required [parameters](#parameters)
+2. Open nuclio Dashboard http://localhost:8070
+3. Create a new nuclio project
+4. Inside the project click on <b>NEW FUNCTION</b>
+5. Import each .yaml file that is in functions [directory](/functions), one by one
+6. Set up [parameters](#parameters) in each function
+7. Deploy each function
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+### Logger
+Install MQTT library
+```sh
+npm install mqtt
+```
+Start logger
+```sh
+node logger.js
+```
+
+------------------------------------------------------------------------------------------------------------------------------
+### Sensors Simulators
+Install MQTT library
+```sh
+npm install mqtt
+```
+Start simulator
+```sh
+node light_sensor.js
+```
+This example takes into consideration only light sensor, you can run all sensors in this [directory](/sensors/simulators). Each simulator generate random numbers.
+
+------------------------------------------------------------------------------------------------------------------------------
+### Devices Simulators
+Install MQTT library
+```sh
+npm install mqtt
+```
+Start simulator
+```sh
+node light.js
+```
+------------------------------------------------------------------------------------------------------------------------------
+
+### ESP8266
+
+For run code un ESP8266, you can compile and load .ino files with [Arduino IDE](https://www.arduino.cc/en/software).
 
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### JS Libraries
 
-For JavaScript MQTT we used this [library](https://www.npmjs.com/package/mqtt).
+For JavaScript MQTT we used this [library](https://www.npmjs.com/package/mqtt)<br>
+For HTTP request we used this [library](https://www.npmjs.com/package/axios).
 
 ### ESP8266 Libraries
 
@@ -88,5 +145,5 @@ We used a general purpose MQTT client for [Android](https://play.google.com/stor
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-**Authors**
+**Author**
 Lorenzo Fasolino
