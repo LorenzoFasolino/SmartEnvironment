@@ -1,0 +1,38 @@
+metadata:
+  name: temperature
+  labels:
+    nuclio.io/project-name: default
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  triggers:
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+    mqtt_temperature:
+      class: ""
+      kind: mqtt
+      name: mqtt_temperature
+      url: "MQTT-USERNAME:MQTT-PASSWORD@MQTT-BROKER-IP:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: iot/sensors/temperature
+  version: 1
+  build:
+    functionSourceCode: dmFyIG1xdHQgPSByZXF1aXJlKCdtcXR0Jyk7DQpjb25zdCBheGlvcyA9IHJlcXVpcmUoJ2F4aW9zJykNCg0KdmFyIHVybCA9ICdtcXR0Oi8vTVFUVC1CUk9LRVItSVAnDQp2YXIgaWZ0dHRfa2V5ID0gIklGVFRULUtFWSINCg0KdmFyIGlmdHR0RW5kcG9pbnQgPSAiaHR0cHM6Ly9tYWtlci5pZnR0dC5jb20vdHJpZ2dlci9idXJuaW5nL3dpdGgva2V5LyIraWZ0dHRfa2V5DQoNCnZhciBvcHRpb25zID0gew0KICAgIHBvcnQ6IDE4ODMsDQogICAgaG9zdDogdXJsLA0KICAgIGNsaWVudElkOiAnbXF0dGpzXycgKyBNYXRoLnJhbmRvbSgpLnRvU3RyaW5nKDE2KS5zdWJzdHIoMiwgOCksDQogICAgdXNlcm5hbWU6ICdNUVRULVVTRVJOQU1FJywNCiAgICBwYXNzd29yZDogJ01RVFQtUEFTU1dPUkQnLA0KfTsNCg0KdmFyIEZVTkNUSU9OX05BTUUgPSAidGVtcGVyYXR1cmUiOw0KDQpmdW5jdGlvbiBzZW5kX2ZlZWRiYWNrX21xdHQobXNnLGxvZyl7DQogICAgdmFyIHEgPSAnaW90L2RldmljZXMvY29sb3InOw0KICAgIHZhciBxTG9nID0gJ2lvdC9sb2dzJzsNCg0KICAgIHZhciBjbGllbnQgPSBtcXR0LmNvbm5lY3QodXJsLCBvcHRpb25zKTsNCg0KICAgIGNsaWVudC5vbignY29ubmVjdCcsIGZ1bmN0aW9uKCkgew0KICAgICAgICBjbGllbnQucHVibGlzaChxLCBtc2csZnVuY3Rpb24oKXsNCiAgICAgICAgICAgIGNsaWVudC5wdWJsaXNoKHFMb2csICJJbnZva2VkIEZ1bmN0aW9uIE1RVFQ6ICIrRlVOQ1RJT05fTkFNRSsiIHJlY2VpdmVkICIrbG9nLGZ1bmN0aW9uKCl7DQogICAgICAgICAgICAgICAgY2xpZW50LmVuZCgpOw0KICAgICAgICAgICAgfSk7DQogICAgICAgIH0pOyAgICAgICAgICAgICANCiAgICB9KTsgICAgICAgIA0KfQ0KDQpmdW5jdGlvbiBiaW4yc3RyaW5nKGFycmF5KXsNCiAgICB2YXIgcmVzdWx0ID0gIiI7DQogICAgZm9yKHZhciBpID0gMDsgaSA8IGFycmF5Lmxlbmd0aDsgKytpKXsNCiAgICByZXN1bHQrPSAoU3RyaW5nLmZyb21DaGFyQ29kZShhcnJheVtpXSkpOw0KICAgIH0NCiAgICByZXR1cm4gcmVzdWx0Ow0KfQ0KDQpleHBvcnRzLmhhbmRsZXIgPSBmdW5jdGlvbihjb250ZXh0LCBldmVudCkgew0KICAgIHZhciBfZXZlbnQgPSBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KGV2ZW50KSk7DQogICAgdmFyIF9kYXRhID0gYmluMnN0cmluZyhfZXZlbnQuYm9keS5kYXRhKTsNCg0KICAgIGNvbnRleHQuY2FsbGJhY2soImZlZWRiYWNrICIrX2RhdGEpOw0KDQogICAgdmFyIHRlbXAgPSBwYXJzZUludChfZGF0YSkNCg0KICAgIHZhciBjb2xvcg0KDQogICAgaWYodGVtcCA8IDIwKXsNCiAgICAgICAgY29sb3IgPSAwOw0KICAgIH1lbHNlIGlmKHRlbXAgPj0gMjAgJiYgdGVtcDw9MzApew0KICAgICAgICBjb2xvciA9IDE7DQogICAgfWVsc2V7DQogICAgICAgIGNvbG9yID0gMjsNCiAgICB9DQoNCiAgICBpZih0ZW1wID4gNDUpew0KICAgICAgYXhpb3MucG9zdChpZnR0dEVuZHBvaW50LCB7fSkNCiAgICB9DQoNCiAgICBjb25zb2xlLmxvZygiVFJJR0dFUiAiK19kYXRhKTsNCiAgICBzZW5kX2ZlZWRiYWNrX21xdHQoIiIrY29sb3IsIiIrX2RhdGEpOw0KfTs=
+    commands:
+      - 'npm install mqtt'
+      - 'npm install axios'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1622554648
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext: {}
+  eventTimeout: ""

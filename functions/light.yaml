@@ -1,0 +1,37 @@
+metadata:
+  name: light
+  labels:
+    nuclio.io/project-name: default
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  triggers:
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+    mqtt_light:
+      class: ""
+      kind: mqtt
+      name: mqtt_light
+      url: "MQTT-USERNAME:MQTT-PASSWORD@MQTT-BROKER-IP:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: iot/sensors/light
+  version: 1
+  build:
+    functionSourceCode: dmFyIG1xdHQgPSByZXF1aXJlKCdtcXR0Jyk7DQoNCnZhciB1cmwgPSAnbXF0dDovL01RVFQtQlJPS0VSLUlQJw0KDQp2YXIgb3B0aW9ucyA9IHsNCiAgICBwb3J0OiAxODgzLA0KICAgIGhvc3Q6IHVybCwNCiAgICBjbGllbnRJZDogJ21xdHRqc18nICsgTWF0aC5yYW5kb20oKS50b1N0cmluZygxNikuc3Vic3RyKDIsIDgpLA0KICAgIHVzZXJuYW1lOiAnTVFUVC1VU0VSTkFNRScsDQogICAgcGFzc3dvcmQ6ICdNUVRULVBBU1NXT1JEJywNCn07DQoNCnZhciBGVU5DVElPTl9OQU1FID0gImxpZ2h0IjsNCg0KZnVuY3Rpb24gc2VuZF9mZWVkYmFja19tcXR0KG1zZyxsb2cpew0KICAgIHZhciBxID0gJ2lvdC9kZXZpY2VzL2JyaWdodG5lc3MnOw0KICAgIHZhciBxTG9nID0gJ2lvdC9sb2dzJzsNCg0KICAgIHZhciBjbGllbnQgPSBtcXR0LmNvbm5lY3QodXJsLCBvcHRpb25zKTsNCg0KICAgIGNsaWVudC5vbignY29ubmVjdCcsIGZ1bmN0aW9uKCkgew0KICAgICAgICBjbGllbnQucHVibGlzaChxLCBtc2csZnVuY3Rpb24oKXsNCiAgICAgICAgICAgIGNsaWVudC5wdWJsaXNoKHFMb2csICJJbnZva2VkIEZ1bmN0aW9uIE1RVFQ6ICIrRlVOQ1RJT05fTkFNRSsiIHJlY2VpdmVkICIrbG9nLGZ1bmN0aW9uKCl7DQogICAgICAgICAgICAgICAgY2xpZW50LmVuZCgpOw0KICAgICAgICAgICAgfSk7DQogICAgICAgIH0pOyAgICAgICAgICAgICANCiAgICB9KTsgICAgICAgIA0KfQ0KDQpmdW5jdGlvbiBiaW4yc3RyaW5nKGFycmF5KXsNCiAgICB2YXIgcmVzdWx0ID0gIiI7DQogICAgZm9yKHZhciBpID0gMDsgaSA8IGFycmF5Lmxlbmd0aDsgKytpKXsNCiAgICByZXN1bHQrPSAoU3RyaW5nLmZyb21DaGFyQ29kZShhcnJheVtpXSkpOw0KICAgIH0NCiAgICByZXR1cm4gcmVzdWx0Ow0KfQ0KDQpleHBvcnRzLmhhbmRsZXIgPSBmdW5jdGlvbihjb250ZXh0LCBldmVudCkgew0KICAgIHZhciBfZXZlbnQgPSBKU09OLnBhcnNlKEpTT04uc3RyaW5naWZ5KGV2ZW50KSk7DQogICAgdmFyIF9kYXRhID0gYmluMnN0cmluZyhfZXZlbnQuYm9keS5kYXRhKTsNCg0KICAgIGNvbnRleHQuY2FsbGJhY2soImZlZWRiYWNrICIrX2RhdGEpOw0KDQogICAgdmFyIGRhdGFUb1NlbmQgPSAxMDAtcGFyc2VJbnQoX2RhdGEpDQoNCg0KICAgIGNvbnNvbGUubG9nKCJUUklHR0VSICIrX2RhdGEpOw0KICAgIHNlbmRfZmVlZGJhY2tfbXF0dCgiIitkYXRhVG9TZW5kLCIiK19kYXRhKTsNCn07
+    commands:
+      - 'npm install mqtt'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1622554527
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext: {}
+  eventTimeout: ""
