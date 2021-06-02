@@ -154,7 +154,7 @@ For .ino files (files for ESP8266 board)
 ### Logger
 Start logger
 ```sh
-node logger.js
+node logger/logger.js
 ```
 
 <b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
@@ -163,7 +163,7 @@ node logger.js
 ### Sensors Simulators
 Start simulator
 ```sh
-node light_sensor.js
+node sensors/simulators/light_sensor.js
 ```
 This example takes into consideration only light sensor, you can run all sensors in this [directory](/sensors/simulators). Each simulator generate random numbers.<br>
 <b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
@@ -172,7 +172,7 @@ This example takes into consideration only light sensor, you can run all sensors
 ### Devices Simulators
 Start simulator
 ```sh
-node light.js
+node devices/simulators/light.js
 ```
 
 <b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
