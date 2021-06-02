@@ -1,6 +1,6 @@
 # SmartEnvironment
 
-SmartEnvironment is a project whose goal is realize an iot application whitout using server. So the main goal is to have a serverless architecture. The main functionality of this project is to set brightness and color of a LED light according to the conditions of the surrounding environment. So the idea is to have the brightness of the LED light that is inversely proportional to the ambient brightness in order to always have a constant brightness, in a room, during the different hours of the day. Moreover the color of the light can change in according to ambient temperature, if temperature il cold, the color of LED light is warm and vice versa. 
+SmartEnvironment is a project whose goal is realize an iot application whitout using server. So the main goal is to have a serverless architecture. The main functionality of this project is to set brightness and color of a LED light according to the conditions of the surrounding environment. So the idea is to have the brightness of the LED light that is inversely proportional to the ambient brightness in order to always have a constant brightness, in a room, during the different hours of the day. Moreover the color of the light can change in according to ambient temperature, if temperature is cold, the color of LED light is warm and vice versa. 
 
 For the realization of the idea we have used an MQTT broker, and different sensors can sand their values on differents queues. In this architecture there are three sensors, light sensor, temperature sensor and humidity sensor. Each of this publish a message on an MQTT topic. Than thare are three nuclio functions, one for each sensor, each of this is subscribed to the related topic. When a function that is subscribed to a topic recive a message, it send a value of brightness or of color the LED light must set. All sensors messages are captured by a logger which stores messages and all values can by monitored on a smartphone. Moreover if the temperature or humidity are too high an email is sent to alert.
 
@@ -22,13 +22,13 @@ For the realization of the idea we have used an MQTT broker, and different senso
 * <b>Nuclio functions</b>:
   * <b>light</b> is triggred by message on topic "iot/sensors/light", when message arrive, it publish a message on topic "iot/devices/brightness" to signal the right brightness to be set
   * <b>temperature</b> is triggred by message on topic "iot/sensors/temperature", when message arrive, it publish a message on topic "iot/devices/color" to signal the right color to be set. If temperature if too high an IFTT applet if trggered by REST API for send an alert e-mail
-  * <b>monitor</b> If humidity if too high an IFTT applet if trggered by REST API for send an alert e-mail
+  * <b>monitor</b> If the humidity if too high an IFTT applet if trggered by REST API for send an alert e-mail
 
 <br><br>
 
 ## Prerequisites
 - OS: 
-    - Ubuntu 18.04 LTS
+    - Ubuntu 21.04
 - Software:
     - Docker and Docker Compose (Application containers engine)
     - Nuclio (Serverless computing provider)
@@ -87,6 +87,8 @@ Start [Nuclio](https://github.com/nuclio/nuclio) using a docker container.
 $ docker run -p 8070:8070 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp nuclio/dashboard:stable-amd64
 ```
 
+Browse to http://localhost:8070.
+
 ----------------------------------------------------------------------------------------------------------------------------
 
 ### RabbitMQ 
@@ -96,6 +98,8 @@ Start [RabbitMQ](https://www.rabbitmq.com) instance with MQTT enabled using dock
 ```sh
 $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt 
 ```
+
+Browse to http://localhost:9000. The default username is <b>guest</b>, and the password is <b>guest</b>
 
 ------------------------------------------------------------------------------------------------------------------------------
 ### RabbitMQ 
@@ -109,7 +113,13 @@ sudo apt install nodejs
 ------------------------------------------------------------------------------------------------------------------------------
 ### IFTTT 
 
-Create two applet that is triggred by an HTTP request with Webhooks
+You have to create two new applet. <br>
+<b>Attention:</b> You have to create two applets that are similar. But for the first the event name must be "<b>burning</b>" and for the second, the event name must be "<b>humidity</b>".
+* For trigger use WebHookes in "if" section:
+<p align="center"><img src="assets/WebHooks.PNG" width="200"/></p>
+
+* For action use Gmail in "than" section:
+<p align="center"><img src="assets/Gmail.PNG" width="200"/></p>
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -118,7 +128,7 @@ In each files replace this strings with you valid parameter<br>
 * <b>MQTT-BROKER-IP</b> the ip of the MQTT broker
 * <b>MQTT-USERNAME</b> the username for MQTT
 * <b>MQTT-PASSWORD</b> the password for MQTT
-* <b>IFTTT-KEY</b> the ifttt key that you can find [here]()
+* <b>IFTTT-KEY</b> the ifttt key that you can find [here](https://ifttt.com/maker_webhooks). (click on _Documentation_ in top right corner)
 
 
 For .ino files (files for ESP8266 board)
@@ -140,37 +150,31 @@ For .ino files (files for ESP8266 board)
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### Logger
-Install MQTT library
-```sh
-npm install mqtt
-```
 Start logger
 ```sh
 node logger.js
 ```
 
+<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
+
 ------------------------------------------------------------------------------------------------------------------------------
 ### Sensors Simulators
-Install MQTT library
-```sh
-npm install mqtt
-```
 Start simulator
 ```sh
 node light_sensor.js
 ```
-This example takes into consideration only light sensor, you can run all sensors in this [directory](/sensors/simulators). Each simulator generate random numbers.
+This example takes into consideration only light sensor, you can run all sensors in this [directory](/sensors/simulators). Each simulator generate random numbers.<br>
+<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
 
 ------------------------------------------------------------------------------------------------------------------------------
 ### Devices Simulators
-Install MQTT library
-```sh
-npm install mqtt
-```
 Start simulator
 ```sh
 node light.js
 ```
+
+<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### ESP8266
@@ -183,6 +187,12 @@ For run code on ESP8266, you can compile and load .ino files with [Arduino IDE](
 
 For JavaScript MQTT we used this [library](https://www.npmjs.com/package/mqtt)<br>
 For HTTP request we used this [library](https://www.npmjs.com/package/axios).
+
+Fon install MQTT library:
+```sh
+npm install mqtt
+```
+
 
 ### ESP8266 Libraries
 
