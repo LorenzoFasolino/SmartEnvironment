@@ -187,24 +187,24 @@ For run code on ESP8266, you can compile and load .ino files with [Arduino IDE](
 
 ### JS Libraries
 
-For JavaScript MQTT we used this [library](https://www.npmjs.com/package/mqtt)<br>
-For HTTP request we used this [library](https://www.npmjs.com/package/axios).<br>
-For read .env file we used this [library](https://www.npmjs.com/package/dotenv).
+For JavaScript MQTT I used this [library](https://www.npmjs.com/package/mqtt)<br>
+For HTTP request I used this [library](https://www.npmjs.com/package/axios).<br>
+For read .env file I used this [library](https://www.npmjs.com/package/dotenv).
 
-Fon install MQTT library:
+For install MQTT library:
 ```sh
 npm install mqtt
 ```
-Fon install MQTT library:
+For install MQTT library:
 ```sh
 npm install dotenv
 ```
 
 ### ESP8266 Libraries
 
-For ESP8266 MQTT we used this [library](https://www.arduino.cc/reference/en/libraries/pubsubclient/).<br>
-For ESP8266 temperature and humidity sensor we used this [library](https://www.arduino.cc/reference/en/libraries/dht-sensor-library/).<br>
-For ESP8266 WI-FI we used this [library](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html).
+For ESP8266 MQTT I used this [library](https://www.arduino.cc/reference/en/libraries/pubsubclient/).<br>
+For ESP8266 temperature and humidity sensor I used this [library](https://www.arduino.cc/reference/en/libraries/dht-sensor-library/).<br>
+For ESP8266 WI-FI I used this [library](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html).
 
 ### MQTT Clients
 
