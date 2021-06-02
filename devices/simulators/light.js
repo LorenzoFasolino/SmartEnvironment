@@ -1,6 +1,6 @@
 var mqtt    = require('mqtt');
 
-var client  = mqtt.connect("mqtt://MQTT-BROCKER-IP",{clientId:"mqttjsLight01",username: "MQTT-USERNAME",password: "MQTT-PASSWORD"});
+var client  = mqtt.connect("mqtt://"+process.env.MQTT_BROCKER_IP,{clientId:"mqttjsLight01",username: process.env.MQTT_USERNAME,password: process.env.MQTT_PASSWORD});
 console.log("connected flag  " + client.connected);
 
 //handle incoming messages

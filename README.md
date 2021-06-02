@@ -102,9 +102,9 @@ $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt
 Browse to http://localhost:9000. The default username is <b>guest</b>, and the password is <b>guest</b>
 
 ------------------------------------------------------------------------------------------------------------------------------
-### RabbitMQ 
-If you haven't NodeJS, you heve to install it. <br>
-Install [NodeJS](https://nodejs.org/it/).
+### Node.JS
+If you haven't Node.JS, you heve to install it. <br>
+Install [Node.JS](https://nodejs.org/it/).
 
 ```sh
 sudo apt install nodejs
@@ -135,6 +135,8 @@ For .ino files (files for ESP8266 board)
 * <b>WIFI-SSID</b> your WI-Fi ssid
 * <b>WIFI-PASSWORD</b> your WI-Fi password 
 
+<b>Attention:</b> files you have to modity are .env, all .ino file and all .yaml files
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### Nuclio function
@@ -155,7 +157,7 @@ Start logger
 node logger.js
 ```
 
-<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
+<b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
 
 ------------------------------------------------------------------------------------------------------------------------------
 ### Sensors Simulators
@@ -164,7 +166,7 @@ Start simulator
 node light_sensor.js
 ```
 This example takes into consideration only light sensor, you can run all sensors in this [directory](/sensors/simulators). Each simulator generate random numbers.<br>
-<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
+<b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
 
 ------------------------------------------------------------------------------------------------------------------------------
 ### Devices Simulators
@@ -173,7 +175,7 @@ Start simulator
 node light.js
 ```
 
-<b>Attention:</b> [Install](#js-libraries) MQTT NodeJS library if you haven't installed it yet.
+<b>Attention:</b> [Install](#js-libraries) MQTT and dotenv Node.JS libraries if you haven't installed it yet.
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,13 +188,17 @@ For run code on ESP8266, you can compile and load .ino files with [Arduino IDE](
 ### JS Libraries
 
 For JavaScript MQTT we used this [library](https://www.npmjs.com/package/mqtt)<br>
-For HTTP request we used this [library](https://www.npmjs.com/package/axios).
+For HTTP request we used this [library](https://www.npmjs.com/package/axios).<br>
+For read .env file we used this [library](https://www.npmjs.com/package/dotenv).
 
 Fon install MQTT library:
 ```sh
 npm install mqtt
 ```
-
+Fon install MQTT library:
+```sh
+npm install dotenv
+```
 
 ### ESP8266 Libraries
 

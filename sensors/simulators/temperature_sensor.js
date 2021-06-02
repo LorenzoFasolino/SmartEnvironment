@@ -1,7 +1,7 @@
 
 var mqtt = require('mqtt');
 
-var url = 'mqtt://MQTT-BROKER-IP'
+var url = 'mqtt://'+process.env.MQTT_BROCKER-IP
 var topic="iot/sensors/temperature"
 var connected = false;
 
@@ -9,8 +9,8 @@ var options = {
     port: 1883,
     host: url,
     clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
-    username: 'MQTT-USERNAME',
-    password: 'MQTT-PASSWORD',
+    username: process.env.MQTT_USERNAME,
+    password: process.env.MQTT_PASSWORD,
 };
 
 var client = mqtt.connect(url, options);
