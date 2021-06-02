@@ -16,7 +16,7 @@ For the realization of the idea we have used an MQTT broker, and different senso
 
 * <b>Sensors</b>: there are light, temperature and humidity sensors that send their values on differents MQTT topics.
 * <b>Devices</b>:
-  * <b>LED light</b> thet is subscibed to topics, where recive messages for change brightness and color
+  * <b>LED light</b> that is subscibed to topics, where recive messages for change brightness and color
   * <b>logger</b> recive informations about sensors values
   * <b>monitor</b> a smartphone that can recive information ablut sensors values
 * <b>Nuclio functions</b>:
