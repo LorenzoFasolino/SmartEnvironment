@@ -195,7 +195,7 @@ For install MQTT library:
 ```sh
 npm install mqtt
 ```
-For install MQTT library:
+For install dotenv library:
 ```sh
 npm install dotenv
 ```
