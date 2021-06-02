@@ -98,6 +98,15 @@ $ docker run -p 9000:15672  -p 1883:1883 -p 5672:5672  cyrilix/rabbitmq-mqtt
 ```
 
 ------------------------------------------------------------------------------------------------------------------------------
+### RabbitMQ 
+If you haven't NodeJS, you heve to install it. <br>
+Install [NodeJS](https://nodejs.org/it/).
+
+```sh
+sudo apt install nodejs
+```
+
+------------------------------------------------------------------------------------------------------------------------------
 ### IFTTT 
 
 Create two applet that is triggred by an HTTP request with Webhooks
