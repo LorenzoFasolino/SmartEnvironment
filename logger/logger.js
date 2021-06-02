@@ -2,7 +2,7 @@ var mqtt = require('mqtt');
 require('dotenv').config()
 
 
-var client  = mqtt.connect("mqtt://"+process.env.MQTT_BROCKER_IP,{clientId:"mqttjs01",username: process.env.MQTT_USERNAME,password: process.env.MQTT_PASSWORD});
+var client  = mqtt.connect("mqtt://"+process.env.MQTT_BROKER_IP,{clientId:"mqttjs01",username: process.env.MQTT_USERNAME,password: process.env.MQTT_PASSWORD});
 console.log("connected flag  " + client.connected);
 
 //handle incoming messages

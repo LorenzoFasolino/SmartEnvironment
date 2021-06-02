@@ -1,8 +1,9 @@
 
 var mqtt = require('mqtt');
-require('dotenv').config()
 
-var url = 'mqtt://'+process.env.MQTT_BROCKER-IP
+console.log(process.env.MQTT_BROKER_IP)
+
+var url = 'mqtt://'+process.env.MQTT_BROKER_IP
 var topic="iot/sensors/humidity"
 var connected = false;
 
@@ -23,8 +24,9 @@ client.on("connect",function(){
 })
 
 function sendData(){
-	console.log("sendData")
-	client.publish(topic, Math.floor(Math.random() * 100).toString());
+    var data = Math.floor(Math.random() * 100).toString()
+	console.log("HUMIDITY sendData: "+data)
+	client.publish(topic, data);
 }
 
 function mainLoop() {
